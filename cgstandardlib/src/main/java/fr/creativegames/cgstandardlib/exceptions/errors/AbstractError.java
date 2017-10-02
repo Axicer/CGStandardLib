@@ -10,7 +10,9 @@ public abstract class AbstractError {
 	 * Return the error's name
 	 * @return {@link String} error's name
 	 */
-	public abstract String getName();
+	public String getName(){
+		return getClass().getSimpleName();
+	}
 	/**
 	 * Return the error's description
 	 * @return {@link String} error's description
