@@ -1,6 +1,5 @@
 package fr.creativegames.cgstandardlib.languages;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -16,14 +15,14 @@ import fr.creativegames.cgstandardlib.utils.Validate;
  */
 public class AbstractLanguage {
 	
-	private JSONObject langObject;
+	private JSONObject langJSON;
 
     /**
      * Main Constructor of an {@link AbstractLanguage}
      * @param object the {@link JSONObject} main element of this language
      */
 	public AbstractLanguage(JSONObject object) {
-		this.langObject = object;
+		this.langJSON = object;
 		try {
 			if(!Validate.notNull(object.getJSONObject("lang"))){
 				ErrorHandler.throwError(new MalformedJSONError());
@@ -49,7 +48,7 @@ public class AbstractLanguage {
 		}
 		String[] nodes = path.split("\\.");
 		try {
-			JSONObject actualNode = langObject.getJSONObject("lang");
+			JSONObject actualNode = langJSON.getJSONObject("lang");
 			for(int i = 0 ; i < nodes.length-1 ; i++){
 				String node = nodes[i];
 				if(actualNode instanceof JSONObject){
@@ -68,4 +67,12 @@ public class AbstractLanguage {
 		}
 		return defaultValue;
 	}
+
+    /**
+     * Return the raw JSON language
+     * @return JSONObject element
+     */
+    public JSONObject getLangJSON() {
+        return langJSON;
+    }
 }
