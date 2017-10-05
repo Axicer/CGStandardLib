@@ -41,7 +41,7 @@ public class AbstractLanguage {
      * @return the given element or the default value if not found
      */
 	@SuppressWarnings("unchecked")
-	public <T> T get(String path, T defaultValue){
+	private <T> T privateGet(String path, T defaultValue){
 		if(!Validate.notNull(path) || !Validate.notEmpty(path)){
 			ErrorHandler.throwError(new NullOrEmptyPathError());
 			return defaultValue;
@@ -68,6 +68,17 @@ public class AbstractLanguage {
 		return defaultValue;
 	}
 
+	/**
+	 * Get the content of the path inside the JSON and replace string pattern {@code '@[0-9]*'} by the values given
+	 * <br>*NOTE* if the replace value is not enough, the value is just the index of the replaceValues array that should be defined 
+	 * @param path {@link String} path of the required text
+	 * @param replaceValues {@link String}[] of replaceable values
+	 * @return {@link String} modified
+	 */
+	public String get(String path, String... replaceValues){
+		return(StringReplacer.replaceGlobal(StringReplacer.replaceVar(privateGet(path, ""), replaceValues), this));
+	}
+	
     /**
      * Return the raw JSON language
      * @return JSONObject element

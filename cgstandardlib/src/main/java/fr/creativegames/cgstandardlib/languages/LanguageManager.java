@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import fr.creativegames.cgstandardlib.exceptions.ErrorHandler;
-import fr.creativegames.cgstandardlib.exceptions.errors.AbstractError;
 import fr.creativegames.cgstandardlib.languages.error.LanguageAlreadyRegisteredError;
 import fr.creativegames.cgstandardlib.languages.error.LanguageNotRegisteredError;
 
